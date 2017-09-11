@@ -1,5 +1,5 @@
 const should = require('should');
-const Utils = require('../dist/ww-tools').Utils;
+const Utils = require('../dist/pocket-tool').Utils;
 
 const utilsCase = require('./utils');
 

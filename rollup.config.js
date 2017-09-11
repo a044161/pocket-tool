@@ -10,8 +10,8 @@ export default {
 		})
 	],
 	output: {
-		file: './dist/ww-tools.js',
-		name: 'wwTools',
+		file: './dist/pocket-tool.js',
+		name: 'pocket-tool',
 		format: 'umd'
 	}
 };
