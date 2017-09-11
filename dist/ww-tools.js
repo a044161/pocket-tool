@@ -1,8 +1,8 @@
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-	typeof define === 'function' && define.amd ? define(factory) :
-	(global.wwTools = factory());
-}(this, (function () { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+	typeof define === 'function' && define.amd ? define(['exports'], factory) :
+	(factory((global.wwTools = {})));
+}(this, (function (exports) { 'use strict';
 
 /**
  * 获取dom元素
@@ -172,7 +172,7 @@ var merge = function merge() {
 	return newObj;
 };
 
-var Utils = {
+var Utils$1 = {
 	isObject: isObject,
 	isArray: isArray,
 	isUndefined: isUndefined,
@@ -182,9 +182,16 @@ var Utils = {
 
 var Core$1 = {
 	Dom: Dom,
-	Utils: Utils
+	Utils: Utils$1
 };
 
-return Core$1;
+var Utils = Core$1.Utils;
+var DOM = Core$1.Dom;
+
+exports.Utils = Utils;
+exports.DOM = DOM;
+exports['default'] = Core$1;
+
+Object.defineProperty(exports, '__esModule', { value: true });
 
 })));
