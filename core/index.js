@@ -1,5 +1,5 @@
-import Dom from './dom';
-import Utils from './utils';
+import Dom from './dom/index';
+import Utils from './utils/index';
 
 export default {
 	Dom,

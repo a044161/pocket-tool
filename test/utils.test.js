@@ -35,6 +35,22 @@ describe('null判断', () => {
 	});
 });
 
+describe('string判断', () => {
+	runTestFn('isString', item => {
+		it(`${item.name}${item.expect ? '为' : '不为'}string`, () => {
+			booleanFn(Utils.isString(item.value), item.expect);
+		});
+	});
+});
+
+describe('function判断', () => {
+	runTestFn('isFunction', item => {
+		it(`${item.name}${item.expect ? '为' : '不为'}function`, () => {
+			booleanFn(Utils.isFunction(item.value), item.expect);
+		});
+	});
+});
+
 describe('对象判断', () => {
 	runTestFn('isObject', item => {
 		it(`${item.name}${item.expect ? '为' : '不为'}对象`, () => {

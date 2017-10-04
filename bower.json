@@ -1,0 +1,25 @@
+{
+  "name": "pocket-tool",
+  "description": "build own tools",
+  "main": "index.js",
+  "authors": [
+    "weng wang"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "tools"
+  ],
+  "homepage": "https://github.com/a044161/pocket-tool",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "mocha": "^3.5.3",
+    "should.js": "shouldjs/should.js#^13.1.0",
+    "jquery": "^3.2.1"
+  }
+}

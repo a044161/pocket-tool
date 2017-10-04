@@ -1,11 +1,17 @@
 {
 	"name": "pocket-tool",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"description": "build own tools",
 	"main": "index.js",
 	"scripts": {
-		"build": "rollup --config rollup.config.js",
-		"test": "npm run build && mocha"
+		"dev": "npm run clear && rollup -w --config rollup.dev.config.js",
+		"build": "npm run clear && npm run test && npm run dist",
+		"dist": "rollup --config rollup.config.js",
+		"test-all": "npm run test && npm run test-browser",
+		"test": "npm run dist && mocha",
+		"test-browser":
+			"phantomjs ./node_modules/mocha-phantomjs-core/mocha-phantomjs-core.js ./test/test-browser/index.html spec '{\"useColors\":true}'",
+		"clear": "rm -rf dist/"
 	},
 	"repository": {
 		"type": "git",
@@ -17,9 +23,12 @@
 	"devDependencies": {
 		"babel-cli": "^6.26.0",
 		"babel-plugin-external-helpers": "^6.22.0",
-		"babel-preset-env": "^1.6.0",
+		"babel-preset-latest": "^6.24.1",
+		"mocha-phantomjs-core": "^2.1.2",
 		"rollup-plugin-babel": "^3.0.2",
-		"rollup-plugin-commonjs": "^8.2.1",
-		"should": "^13.0.1"
+		"rollup-plugin-node-resolve": "^3.0.0",
+		"rollup-plugin-uglify": "^2.0.1",
+		"should": "^13.0.1",
+		"uglify-es": "^3.1.3"
 	}
 }

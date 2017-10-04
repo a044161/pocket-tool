@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>DOM DEMO</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../../bower_components/mocha/mocha.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div id="mocha"></div>
+
+    <!-- class test -->
+    <div class="test-class">test-class1</div>
+    <div class="test-class">test-class2</div>
+    <div class="test-class">test-class3</div>
+
+    <div class="test-class test-class-level2">两个class</div>
+
+    <div class="test-class-parent">
+        <div class="test-class-child">子class</div>
+    </div>
+    <!-- /class test -->
+
+    <!-- id test -->
+    <div id="test-id">test-id</div>
+    <!-- /id test -->
+
+    <!-- name test -->
+    <div class="test-name" id="test-name" name="test-name">test-name</div>
+    <!-- name test -->
+
+    <!-- data test -->
+    <div class="test-name" id="test-name" data-test="test-data">test-name</div>
+    <!-- data test -->
+
+    <!-- tag p test -->
+    <p>p标签1</p>
+    <p>p标签2</p>
+    <p>p标签3</p>
+    <!-- /tag p test -->
+
+    <!-- addClass removeClass test -->
+    <div id="addclass-test">新增类名</div>
+    <!-- /addClass removeClass test -->
+
+    <!-- on off test -->
+    <div id="on-test">增加事件</div>
+    <!-- /on off test -->
+    <div id="getdataset-test-string" data-target="'a'"></div>
+    <div id="getdataset-test-number" data-target="1"></div>
+    <div id="getdataset-test-array" data-target="[1,2,3]"></div>
+    <div id="getdataset-test-object" data-target="{1:'a', 2:'b', b: [1,3,4],c:{cc:1}}"></div>
+
+    <script src="../../bower_components/should.js/should.js"></script>
+    <script src="../../bower_components/mocha/mocha.js"></script>
+    <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+
+    <script src="../../dist/pocket-tool.js"></script>
+    <script>
+        mocha.setup('bdd')
+    </script>
+    <script src="./test/getElement.js"></script>
+    <script src="./test/addClass.js"></script>
+    <script src="./test/removeClass.js"></script>
+    <script src="./test/on.js"></script>
+    <script src="./test/off.js"></script>
+    <script src="./test/getDataSet.js"></script>
+    <script>
+        mocha.checkLeaks();
+        mocha.run();
+    </script>
+</body>
+
+</html>
