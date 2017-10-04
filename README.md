@@ -1,4 +1,29 @@
-[TOC]
+<!-- TOC -->
+
+- [pocket-tool](#pocket-tool)
+    - [功能](#功能)
+    - [功能点](#功能点)
+        - [utils](#utils)
+        - [dom](#dom)
+    - [调用方式](#调用方式)
+    - [API](#api)
+        - [Utils.isUndefined(obj)](#utilsisundefinedobj)
+        - [Utils.isNull(obj)](#utilsisnullobj)
+        - [Utils.isObject(obj)](#utilsisobjectobj)
+        - [Utils.isArray(obj)](#utilsisarrayobj)
+        - [Utils.isFunction(obj)](#utilsisfunctionobj)
+        - [Utils.isString(obj)](#utilsisstringobj)
+        - [Utils.merge(obj,[obj...])](#utilsmergeobjobj)
+        - [DOM.getElement(tag)](#domgetelementtag)
+        - [DOM.addClass(element, className)](#domaddclasselement-classname)
+        - [DOM.removeClass(element, className)](#domremoveclasselement-classname)
+        - [DOM.on(element, event, handler)](#domonelement-event-handler)
+        - [DOM.off(element, event, handler)](#domoffelement-event-handler)
+        - [DOM.getDataSet(element, key)](#domgetdatasetelement-key)
+    - [DOM 支持链式调用](#dom-支持链式调用)
+    - [Feture](#feture)
+
+<!-- /TOC -->
 
 # pocket-tool
 
@@ -18,7 +43,9 @@
 2. isNull - 判断是否为null
 3. isObject - 判断是否为对象
 4. isArray - 判断是否为数组
-5. merge - 合并对象
+5. isFunction - 判断是否为函数
+6. isString - 判断是否为字符串
+7. merge - 合并对象
 
 ### dom
 
@@ -112,6 +139,42 @@ Utils.isObject('1');
 **例子** 
 ```
 Utils.isArray('1');
+// return: false
+```
+
+### Utils.isFunction(obj)
+
+判断是否为函数  
+
+**参数**  
+
+1. obj (*string*|*number*|*array*|*object*|*boolean*) - 想要判断的对象
+
+**返回值**
+
+`true` or `false`  
+
+**例子** 
+```
+Utils.isFunction('1');
+// return: false
+```
+
+### Utils.isString(obj)
+
+判断是否为字符串  
+
+**参数**  
+
+1. obj (*string*|*number*|*array*|*object*|*boolean*) - 想要判断的对象
+
+**返回值**
+
+`true` or `false`  
+
+**例子** 
+```
+Utils.iString('1');
 // return: false
 ```
 
@@ -258,15 +321,33 @@ DOM.off(div, 'click', fn);
 
 // app.js
 const div = DOM.getElement('.a-div');
-DOM.getDataSetn(div, 'data');
+DOM.getDataSet(div, 'data');
 // return: 1
 ```
 **返回值**  
 
 具体data的值，若为数据或对象，则会进行转换
 
+## DOM 支持链式调用
+
+`addClass`、`removeClass`、`on`、`off`、`getDataSet`均支持链式操作
+
+**例子** 
+
+```
+// index.html
+<div class="a-div"></div>
+
+// app.js
+const getElment = DOM.getElement;
+
+getElment('.a-div').addClass('a-div-new');
+
+// <div class="a-div a-div-new"></div>
+```
+
 ## Feture
 
-* 增加DOM部分的单元测试
-* 增加单元测试覆盖率的统计
-* 增加开发模式
+- [x] 增加DOM部分的单元测试
+- [x] 增加DOM部分的链式调用
+- [ ] 增加单元测试覆盖率的统计

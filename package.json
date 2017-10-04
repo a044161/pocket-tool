@@ -5,7 +5,7 @@
 	"main": "index.js",
 	"scripts": {
 		"dev": "npm run clear && rollup -w --config rollup.dev.config.js",
-		"build": "npm run clear && npm run test && npm run dist",
+		"build": "npm run clear && npm run test-all && npm run dist",
 		"dist": "rollup --config rollup.config.js",
 		"test-all": "npm run test && npm run test-browser",
 		"test": "npm run dist && mocha",
@@ -23,6 +23,7 @@
 	"devDependencies": {
 		"babel-cli": "^6.26.0",
 		"babel-plugin-external-helpers": "^6.22.0",
+		"babel-polyfill": "^6.26.0",
 		"babel-preset-latest": "^6.24.1",
 		"mocha-phantomjs-core": "^2.1.2",
 		"rollup-plugin-babel": "^3.0.2",

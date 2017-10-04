@@ -1,10 +1,6 @@
 import Utils from '../utils/index';
 
 const on = function(element, event, handler, propagation) {
-	if (Utils.isUndefined(element.className)) {
-		throw `${element} 必须为node object`;
-	}
-
 	if (!Utils.isString(event)) {
 		throw `${event} 必须为string`;
 	}
@@ -13,16 +9,26 @@ const on = function(element, event, handler, propagation) {
 		throw `${handler} 必须为Function`;
 	}
 
+	if (!element.length) {
+		element = [element];
+	} else {
+		element = Array.from(element);
+	}
+
 	if (document.addEventListener) {
 		if (!propagation) {
 			propagation = false;
 		}
 		if (element && event && handler) {
-			element.addEventListener(event, handler, propagation);
+			element.forEach(e => {
+				e.addEventListener(event, handler, propagation);
+			});
 		}
 	} else {
 		if (element && event && handler) {
-			element.attachEvent('on' + event, handler);
+			element.forEach(e => {
+				e.attachEvent('on' + event, handler);
+			});
 		}
 	}
 };
