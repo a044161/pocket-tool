@@ -11,6 +11,38 @@
 
 	describe('addClass Test', function() {
 		describe('Error 相关', function() {
+			it('参数1传入string为错误类型', function() {
+				addClass.bind('getElement', 'test-error').should.throw();
+			});
+
+			it('参数1传入number为错误类型', function() {
+				addClass.bind(1, 'test-error').should.throw();
+			});
+
+			it('参数1传入null为错误类型', function() {
+				addClass.bind(null, 'test-error').should.throw();
+			});
+
+			it('参数1传入undefined为错误类型', function() {
+				addClass.bind(undefined, 'test-error').should.throw();
+			});
+
+			it('参数1传入boolean为错误类型', function() {
+				addClass.bind(true, 'test-error').should.throw();
+			});
+
+			it('参数1传入function为错误类型', function() {
+				addClass.bind(function() {}, 'test-error').should.throw();
+			});
+
+			it('参数1传入{}为错误类型', function() {
+				addClass.bind({}, 'test-error').should.throw();
+			});
+
+			it('参数1传入[]为错误类型', function() {
+				addClass.bind([], 'test-error').should.throw();
+			});
+
 			it('参数2传入[]为错误类型', function() {
 				addClass.bind(getElement, []).should.throw();
 			});
@@ -34,6 +66,10 @@
 			it('参数2传入function为错误类型', function() {
 				addClass.bind(getElement, function() {}).should.throw();
 			});
+
+			it('参数2传入boolean为错误类型', function() {
+				addClass.bind(getElement, true).should.throw();
+			});
 		});
 
 		describe('增加类名相关', function() {
@@ -44,19 +80,19 @@
 
 			it('根据id增加一个类名', function() {
 				addClass(getElment_target_1, NEW_CLASS_NAME_1);
-				getElment_target_1.className.should.equal(
+				getElment_target_1[0].className.should.equal(
 					jquery_target_1.attr('class')
 				);
 			});
 
 			it('根据id重复增加类名', function() {
 				addClass(getElment_target_1, NEW_CLASS_NAME_1);
-				getElment_target_1.className.should.equal(NEW_CLASS_NAME_1);
+				getElment_target_1[0].className.should.equal(NEW_CLASS_NAME_1);
 			});
 
 			it('根据id增加两个类名', function() {
 				addClass(getElment_target_1, NEW_CLASS_NAME_2);
-				getElment_target_1.className.should.equal(
+				getElment_target_1[0].className.should.equal(
 					jquery_target_1.attr('class')
 				);
 			});

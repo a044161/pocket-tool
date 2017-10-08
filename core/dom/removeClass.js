@@ -1,17 +1,22 @@
 import Utils from '../utils/index';
 
 const removeClass = function(element, className) {
+	if (element.length) {
+		element = Array.from(element);
+	} else {
+		element = [element];
+	}
+
 	if (!Utils.isString(className)) {
 		throw '传入的对象类型必须为string';
 	}
 
-	if (!element.length) {
-		element = [element];
-	} else {
-		element = Array.from(element);
-	}
+	element = Array.from(element);
 
 	element.forEach(e => {
+		if (!e.nodeType) {
+			throw `${e} 必须为HTMLElement`;
+		}
 		const oldClassName =
 			e.className.length === 0 ? [] : e.className.split(' ');
 		const removeClassName = className.split(' ');

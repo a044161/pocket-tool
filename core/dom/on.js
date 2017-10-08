@@ -1,6 +1,12 @@
 import Utils from '../utils/index';
 
 const on = function(element, event, handler, propagation) {
+	if (element.length) {
+		element = Array.from(element);
+	} else {
+		element = [element];
+	}
+
 	if (!Utils.isString(event)) {
 		throw `${event} 必须为string`;
 	}
@@ -9,11 +15,7 @@ const on = function(element, event, handler, propagation) {
 		throw `${handler} 必须为Function`;
 	}
 
-	if (!element.length) {
-		element = [element];
-	} else {
-		element = Array.from(element);
-	}
+	element = Array.from(element);
 
 	if (document.addEventListener) {
 		if (!propagation) {
@@ -21,12 +23,18 @@ const on = function(element, event, handler, propagation) {
 		}
 		if (element && event && handler) {
 			element.forEach(e => {
+				if (!e.nodeType) {
+					throw `${e} 必须为HTMLElement`;
+				}
 				e.addEventListener(event, handler, propagation);
 			});
 		}
 	} else {
 		if (element && event && handler) {
 			element.forEach(e => {
+				if (!e.nodeType) {
+					throw `${e} 必须为HTMLElement`;
+				}
 				e.attachEvent('on' + event, handler);
 			});
 		}

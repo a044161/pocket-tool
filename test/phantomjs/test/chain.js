@@ -21,14 +21,14 @@
 
 			it('getElement + addClass', function() {
 				getElement_target_1.addClass(NEW_CLASS_NAME_1);
-				getElement_target_1.className.should.equal(
+				getElement_target_1[0].className.should.equal(
 					jquery_target_1.attr('class')
 				);
 			});
 
 			it('getElement + removeClass', function() {
 				getElement_target_1.removeClass(NEW_CLASS_NAME_1);
-				getElement_target_1.className.should.equal(
+				getElement_target_1[0].className.should.equal(
 					jquery_target_1.attr('class')
 				);
 			});
@@ -37,7 +37,7 @@
 				getElement_target_1
 					.addClass(NEW_CLASS_NAME_1)
 					.removeClass(NEW_CLASS_NAME_1);
-				getElement_target_1.className.should.equal(
+				getElement_target_1[0].className.should.equal(
 					jquery_target_1.attr('class')
 				);
 			});
@@ -52,7 +52,7 @@
 					clickVar += 1;
 				};
 				getElement_target_3.on('click', clickFn);
-				getElement_target_3.click();
+				getElement_target_3[0].click();
 				clickVar.should.equal(1);
 
 				done();
@@ -65,9 +65,9 @@
 				};
 
 				getElement_target_3.on('click', clickFn);
-				getElement_target_3.click();
+				getElement_target_3[0].click();
 				getElement_target_3.off('click', clickFn);
-				getElement_target_3.click();
+				getElement_target_3[0].click();
 				clickVar.should.equal(1);
 				done();
 			});

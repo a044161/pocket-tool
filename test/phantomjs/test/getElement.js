@@ -42,7 +42,7 @@
 			var jquery_id = $(ID);
 
 			it('无匹配ID，返回null', function() {
-				should(getElement('#none')).be.null();
+				should(getElement('#none')[0]).be.null();
 			});
 
 			it('成功获取到ID，则为object类型', function() {
@@ -50,11 +50,11 @@
 			});
 
 			it('id的值相同，都为text-id', function() {
-				should(getElement_id.id).equal(jquery_id.attr('id'));
+				getElement_id[0].id.should.equal(jquery_id.attr('id'));
 			});
 
 			it('id的内容相同，都为text-id', function() {
-				should(getElement_id.innerText).equal(jquery_id.text());
+				getElement_id[0].innerText.should.equal(jquery_id.text());
 			});
 		});
 

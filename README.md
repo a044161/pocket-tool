@@ -344,6 +344,42 @@ const getElment = DOM.getElement;
 getElment('.a-div').addClass('a-div-new');
 
 // <div class="a-div a-div-new"></div>
+
+```
+
+想要获取子对象，用法和`jQuery`相同
+
+
+```
+// index.html
+<div class="a-div"></div>
+<div class="a-div"></div>
+<div class="a-div"></div>
+
+// app.js
+const getElment = DOM.getElement;
+
+getElment('.a-div').eq(0).addClass('a-div-new');
+
+// <div class="a-div a-div-new"></div>
+
+```
+
+获取真实DOM元素则通过索引值获取
+
+```
+// index.html
+<div class="a-div"></div>
+<div class="a-div"></div>
+<div class="a-div"></div>
+
+// app.js
+const getElment = DOM.getElement;
+
+getElment('.a-div')[0].className;
+
+// a-div
+
 ```
 
 ## Feture

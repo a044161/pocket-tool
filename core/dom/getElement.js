@@ -13,25 +13,29 @@ const _getElement = function(tag) {
 
 	const isId = tag.indexOf('#') === 0;
 	const isClass = tag.indexOf('.') === 0;
-	let element = [];
+	let elementArray = [];
+
 	if (document.querySelector) {
 		if (isClass || !isId) {
-			element = document.querySelectorAll(tag);
+			elementArray = document.querySelectorAll(tag);
 		} else {
-			element.push(document.querySelector(tag));
+			elementArray.push(document.querySelector(tag));
 		}
 	} else if (isId || isClass) {
 		tag = tag.slice(1);
 		if (isId) {
-			element.push(document.getElementById(tag));
+			elementArray.push(document.getElementById(tag));
 		} else if (isClass) {
-			element = document.getElementsByClassName(tag);
+			elementArray = document.getElementsByClassName(tag);
 		} else {
-			element = document.getElementsByTagName(tag);
+			elementArray = document.getElementsByTagName(tag);
 		}
 	}
 
-	let __proto__ = {
+	elementArray = Array.from(elementArray);
+
+	// 拓展方法
+	const extendObj = {
 		addClass(className) {
 			_addClass(this, className);
 			return this;
@@ -49,27 +53,26 @@ const _getElement = function(tag) {
 		getDataSet(key) {
 			return _getDataSet(this, key);
 		},
-		text(val) {
-			if (val) {
-				this.innerText = val;
-			} else {
-				return this.innerText;
+		eq(index) {
+			if (this[index]) {
+				let e = Object.create(extendObj);
+				e[0] = this[index];
+				e.length = 1;
+				return e;
 			}
+			return this[index];
 		}
 	};
-	element = Array.from(element);
 
-	element.forEach(e => {
-		if (!Utils.isNull(e)) {
-			e.__proto__ = Object.assign(e.__proto__, __proto__);
-		}
+	// 构建Element的原型链
+	let element = Object.create(extendObj);
+
+	// 创建类数组对象
+	elementArray.forEach((e, index) => {
+		element[index] = e;
 	});
 
-	if (isId) {
-		return element[0];
-	}
-
-	element.__proto__ = __proto__;
+	element.length = elementArray.length;
 
 	return element;
 };

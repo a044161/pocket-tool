@@ -1,13 +1,13 @@
 {
 	"name": "pocket-tool",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"description": "build own tools",
 	"main": "index.js",
 	"scripts": {
 		"dev": "npm run clean && rollup -w --config rollup.dev.config.js",
 		"build": "npm run clean && npm run test && npm run dist",
-		"dist": "npm run clean && rollup --config rollup.config.js",
-		"dist:dev": "npm run clean &&  rollup --config rollup.dev.config.js",
+		"dist": "rollup --config rollup.config.js",
+		"dist:dev": "npm run clean && rollup --config rollup.dev.config.js",
 		"test": "npm run test:mocha && npm run test:phantomjs",
 		"test:mocha": "npm run dist && mocha test/mocha",
 		"test:phantomjs":

@@ -5,6 +5,10 @@ const getDataSet = function(element, key) {
 		element = element[0];
 	}
 
+	if (!element.nodeType) {
+		throw `${element} 必须为HTMLElement`;
+	}
+
 	if (!Utils.isString(key)) {
 		throw '参数2传入的对象类型必须为string';
 	}

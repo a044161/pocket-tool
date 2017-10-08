@@ -10,6 +10,38 @@
 		var noFn = function() {};
 
 		describe('Error 相关', function() {
+			it('参数1传入string为错误类型', function() {
+				on.bind(this, 'getElement', 'click', noFn).should.throw();
+			});
+
+			it('参数1传入number为错误类型', function() {
+				on.bind(this, 1, 'click', noFn).should.throw();
+			});
+
+			it('参数1传入null为错误类型', function() {
+				on.bind(this, null, 'click', noFn).should.throw();
+			});
+
+			it('参数1传入undefined为错误类型', function() {
+				on.bind(this, undefined, 'click', noFn).should.throw();
+			});
+
+			it('参数1传入boolean为错误类型', function() {
+				on.bind(this, true, 'click', noFn).should.throw();
+			});
+
+			it('参数1传入function为错误类型', function() {
+				on.bind(this, function() {}, 'click', noFn).should.throw();
+			});
+
+			it('参数1传入{}为错误类型', function() {
+				on.bind(this, {}, 'click', noFn).should.throw();
+			});
+
+			it('参数1传入[]为错误类型', function() {
+				on.bind(this, [], 'click', noFn).should.throw();
+			});
+
 			it('参数2传入[]为错误类型', function() {
 				on.bind(this, getElement_target_1, [], noFn).should.throw();
 			});
@@ -64,7 +96,7 @@
 					clickVar += 1;
 				};
 				on(getElement_target_1, 'click', clickFn);
-				getElement_target_1.click();
+				getElement_target_1[0].click();
 
 				clickVar.should.equal(1);
 

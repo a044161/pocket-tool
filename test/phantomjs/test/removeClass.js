@@ -10,6 +10,38 @@
 
 	describe('removeClass Test', function() {
 		describe('Error 相关', function() {
+			it('参数1传入string为错误类型', function() {
+				removeClass.bind('getElement', 'test-error').should.throw();
+			});
+
+			it('参数1传入number为错误类型', function() {
+				removeClass.bind(1, 'test-error').should.throw();
+			});
+
+			it('参数1传入null为错误类型', function() {
+				removeClass.bind(null, 'test-error').should.throw();
+			});
+
+			it('参数1传入undefined为错误类型', function() {
+				removeClass.bind(undefined, 'test-error').should.throw();
+			});
+
+			it('参数1传入boolean为错误类型', function() {
+				removeClass.bind(true, 'test-error').should.throw();
+			});
+
+			it('参数1传入function为错误类型', function() {
+				removeClass.bind(function() {}, 'test-error').should.throw();
+			});
+
+			it('参数1传入{}为错误类型', function() {
+				removeClass.bind({}, 'test-error').should.throw();
+			});
+
+			it('参数1传入[]为错误类型', function() {
+				removeClass.bind([], 'test-error').should.throw();
+			});
+
 			it('参数2传入[]为错误类型', function() {
 				removeClass.bind(getElement, []).should.throw();
 			});
@@ -43,14 +75,14 @@
 
 			it('根据ID删除一个类名', function() {
 				removeClass(getElment_target_1, REMOVE_CLASS_NAME_1);
-				getElment_target_1.className.should.be.equal(
+				getElment_target_1[0].className.should.be.equal(
 					jquery_target_1.attr('class')
 				);
 			});
 
 			it('根据ID删除两个类名', function() {
 				removeClass(getElment_target_1, REMOVE_CLASS_NAME_2);
-				getElment_target_1.className.should.be.equal(
+				getElment_target_1[0].className.should.be.equal(
 					jquery_target_1.attr('class')
 				);
 			});

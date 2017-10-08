@@ -1,4 +1,4 @@
-import 'babel-polyfill/dist/polyfill.min';
+import 'babel-polyfill/dist/polyfill';
 import Core from './core/index.js';
 
 export const Utils = Core.Utils;
