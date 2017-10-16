@@ -10,19 +10,26 @@
         - [dom](#dom)
     - [调用方式](#调用方式)
     - [API](#api)
-        - [Utils.isUndefined(obj)](#utilsisundefinedobj)
-        - [Utils.isNull(obj)](#utilsisnullobj)
-        - [Utils.isObject(obj)](#utilsisobjectobj)
-        - [Utils.isArray(obj)](#utilsisarrayobj)
-        - [Utils.isFunction(obj)](#utilsisfunctionobj)
-        - [Utils.isString(obj)](#utilsisstringobj)
-        - [Utils.merge(obj,[obj...])](#utilsmergeobjobj)
-        - [DOM.getElement(tag)](#domgetelementtag)
-        - [DOM.addClass(element, className)](#domaddclasselement-classname)
-        - [DOM.removeClass(element, className)](#domremoveclasselement-classname)
-        - [DOM.on(element, event, handler)](#domonelement-event-handler)
-        - [DOM.off(element, event, handler)](#domoffelement-event-handler)
-        - [DOM.getDataSet(element, key)](#domgetdatasetelement-key)
+        - [Utils](#utils)
+            - [Utils.isUndefined(obj)](#utilsisundefinedobj)
+            - [Utils.isNull(obj)](#utilsisnullobj)
+            - [Utils.isObject(obj)](#utilsisobjectobj)
+            - [Utils.isArray(obj)](#utilsisarrayobj)
+            - [Utils.isFunction(obj)](#utilsisfunctionobj)
+            - [Utils.isString(obj)](#utilsisstringobj)
+            - [Utils.isNumber](#utilsisnumber)
+            - [Utils.merge(obj,[obj...])](#utilsmergeobjobj)
+            - [Utils.toArray(obj)](#utilstoarrayobj)
+            - [Utils.typeCheck.any(obj)](#utilstypecheckanyobj)
+            - [Utils.typeCheck.all(obj)](#utilstypecheckallobj)
+            - [Utils.typeIs(obj)](#utilstypeisobj)
+        - [DOM](#dom)
+            - [DOM.getElement(tag)](#domgetelementtag)
+            - [DOM.addClass(element, className)](#domaddclasselement-classname)
+            - [DOM.removeClass(element, className)](#domremoveclasselement-classname)
+            - [DOM.on(element, event, handler)](#domonelement-event-handler)
+            - [DOM.off(element, event, handler)](#domoffelement-event-handler)
+            - [DOM.getDataSet(element, key)](#domgetdatasetelement-key)
     - [DOM 支持链式调用](#dom-支持链式调用)
     - [Feture](#feture)
 
@@ -62,7 +69,7 @@
 ## 调用方式
 
 可以通过 `npm` 方式安装
-```
+```javascript
 npm install pocket-tools --save
 
 // app.js
@@ -73,7 +80,9 @@ import { Utils,Dom } from 'pocket-tools';
 
 ## API
 
-### Utils.isUndefined(obj)
+### Utils
+
+#### Utils.isUndefined(obj)
 
 判断是否为undefined  
 
@@ -86,12 +95,12 @@ import { Utils,Dom } from 'pocket-tools';
 `true` or `false`
 
 **例子** 
-```
+```javascript
 Utils.isUndeFined('1');
 // return: false
 ```
 
-### Utils.isNull(obj)
+#### Utils.isNull(obj)
 
 判断是否为null  
 
@@ -104,12 +113,12 @@ Utils.isUndeFined('1');
 `true` or `false`
 
 **例子** 
-```
+```javascript
 Utils.isNull('1');
 // return: false
 ```
 
-### Utils.isObject(obj)
+#### Utils.isObject(obj)
 
 判断是否为对象  
 
@@ -122,12 +131,12 @@ Utils.isNull('1');
 `true` or `false`
 
 **例子** 
-```
+```javascript
 Utils.isObject('1');
 // return: false
 ```
 
-### Utils.isArray(obj)
+#### Utils.isArray(obj)
 
 判断是否为数组  
 
@@ -140,12 +149,12 @@ Utils.isObject('1');
 `true` or `false`  
 
 **例子** 
-```
+```javascript
 Utils.isArray('1');
 // return: false
 ```
 
-### Utils.isFunction(obj)
+#### Utils.isFunction(obj)
 
 判断是否为函数  
 
@@ -158,12 +167,12 @@ Utils.isArray('1');
 `true` or `false`  
 
 **例子** 
-```
+```javascript
 Utils.isFunction('1');
 // return: false
 ```
 
-### Utils.isString(obj)
+#### Utils.isString(obj)
 
 判断是否为字符串  
 
@@ -176,12 +185,29 @@ Utils.isFunction('1');
 `true` or `false`  
 
 **例子** 
-```
+```javascript
 Utils.iString('1');
-// return: false
+// return: true
+```
+#### Utils.isNumber
+
+判断是否为数值型  
+
+**参数**  
+
+1. obj (*string*|*number*|*array*|*object*|*boolean*) - 想要判断的对象
+
+**返回值**
+
+`true` or `false`  
+
+**例子** 
+```javascript
+Utils.isNumber(1);
+// return: true
 ```
 
-### Utils.merge(obj,[obj...])
+#### Utils.merge(obj,[obj...])
 
 合并数组
 
@@ -194,12 +220,142 @@ Utils.iString('1');
 新的数组对象
 
 **例子** 
-```
+```javascript
 Utils.isArray({a:1},{b:1});
 // return: {a:1,b:1}
 ```
 
-### DOM.getElement(tag)
+#### Utils.toArray(obj)
+
+类数组对象转换
+
+**参数**  
+
+1. obj (*object*) - 传入想要转换的对象
+
+**返回值**  
+
+新的数组对象
+
+**例子** 
+```javascript
+Utils.toArray({
+    0: 'a',
+    1: 'b',
+    length: 2
+});
+// return: ['a', 'b']
+```
+
+#### Utils.typeCheck.any(obj)
+
+批量对象判断 - 任何一个条件满足即可
+
+**参数**  
+
+1. obj (*object*|*array*) - 传入想要判断的字面量对象或者数组对象   
+
+**返回值**  
+
+`true` or `false`  
+
+**例子** 
+```javascript
+var obj = {
+    type: "string",// number,function,object,array,null,undefined
+    value: '1'
+};
+Utils.typeCheck.any(obj);
+// return: true
+
+var arr = [
+    {
+        type: 'string',
+        value: '1'
+    },
+    {
+        type: 'number',
+        value: '1'
+    }
+];
+Utils.typeCheck.any(obj);
+// return: true
+```
+
+#### Utils.typeCheck.all(obj)
+
+批量对象判断 - 条件需要全部满足
+
+**参数**  
+
+1. obj (*object*|*array*) - 传入想要判断的字面量对象或者数组对象   
+
+**返回值**  
+
+`true` or `false`  
+
+**例子** 
+```javascript
+var obj = {
+    type: "string",// number,function,object,array,null,undefined
+    value: '1'
+};
+Utils.typeCheck.all(obj);
+// return: true
+
+var arr = [
+    {
+        type: 'string',
+        value: '1'
+    },
+    {
+        type: 'number',
+        value: 1
+    }
+];
+Utils.typeCheck.all(arr);
+// return: true
+```
+
+#### Utils.typeIs(obj)
+
+判断对象属于哪种类型
+
+**参数**  
+
+1. obj (*string*|*number*|*array*|*object*|*function*|*null*|*undefined*) - 传入想要判断的对象
+
+**返回值** 
+
+*string*|*number*|*array*|*object*|*function*|*null*|*undefined*
+
+
+**例子** 
+```javascript
+var obj = {
+    type: "string",// number,function,object,array,null,undefined
+    value: '1'
+};
+Utils.typeIs(obj);
+// return: 'object'
+
+var arr = [
+    {
+        type: 'string',
+        value: '1'
+    },
+    {
+        type: 'number',
+        value: 1
+    }
+];
+Utils.typeIs(arr);
+// return: 'array'
+```
+
+### DOM
+
+#### DOM.getElement(tag)
 
 获取dom元素
 
@@ -213,7 +369,7 @@ Utils.isArray({a:1},{b:1});
 
 **例子** 
 
-```
+```javascript
 // index.html
 <div class="a-div"></div>
 
@@ -222,7 +378,7 @@ DOM.getElement('.a-div');
 // return [HTMLCollection]
 ```
 
-### DOM.addClass(element, className)
+#### DOM.addClass(element, className)
 
 增加类名
 
@@ -233,7 +389,7 @@ DOM.getElement('.a-div');
 
 **例子** 
 
-```
+```javascript
 // index.html
 <div class="a-div"></div>
 
@@ -243,7 +399,7 @@ DOM.addClass(div, 'class1 class2');
 // <div class="a-div class1 class2"></div>
 ```
 
-### DOM.removeClass(element, className)
+#### DOM.removeClass(element, className)
 
 删除类名
 
@@ -254,7 +410,7 @@ DOM.addClass(div, 'class1 class2');
 
 **例子** 
 
-```
+```javascript
 // index.html
 <div class="a-div class1 class2"></div>
 
@@ -264,7 +420,7 @@ DOM.removeClass(div, 'class1 class2');
 // <div class="a-div"></div>
 ```
 
-### DOM.on(element, event, handler)
+#### DOM.on(element, event, handler)
 
 增加事件监听器
 
@@ -276,7 +432,7 @@ DOM.removeClass(div, 'class1 class2');
 
 **例子** 
 
-```
+```javascript
 // index.html
 <div class="a-div"></div>
 
@@ -285,7 +441,7 @@ const div = DOM.getElement('.a-div');
 DOM.on(div, 'click', fn);
 ```
 
-### DOM.off(element, event, handler)
+#### DOM.off(element, event, handler)
 
 移除事件监听器
 
@@ -297,7 +453,7 @@ DOM.on(div, 'click', fn);
 
 **例子** 
 
-```
+```javascript
 // index.html
 <div class="a-div"></div>
 
@@ -307,7 +463,7 @@ DOM.on(div, 'click', fn);
 DOM.off(div, 'click', fn);
 ```
 
-### DOM.getDataSet(element, key)
+#### DOM.getDataSet(element, key)
 
 获取dataset
 
@@ -318,7 +474,7 @@ DOM.off(div, 'click', fn);
 
 **例子** 
 
-```
+```javascript
 // index.html
 <div class="a-div" data="1"></div>
 
@@ -337,7 +493,7 @@ DOM.getDataSet(div, 'data');
 
 **例子** 
 
-```
+```javascript
 // index.html
 <div class="a-div"></div>
 
@@ -353,7 +509,7 @@ getElment('.a-div').addClass('a-div-new');
 想要获取子对象，用法和`jQuery`相同
 
 
-```
+```javascript
 // index.html
 <div class="a-div"></div>
 <div class="a-div"></div>
@@ -370,7 +526,7 @@ getElment('.a-div').eq(0).addClass('a-div-new');
 
 获取真实DOM元素则通过索引值获取
 
-```
+```javascript
 // index.html
 <div class="a-div"></div>
 <div class="a-div"></div>
@@ -390,5 +546,6 @@ getElment('.a-div')[0].className;
 - [x] 增加DOM部分的单元测试
 - [x] 增加DOM部分的链式调用
 - [x] 增加单元测试覆盖率的统计(Utils部分)
+- [x] 增加Number类型判断
 - [ ] 增加单元测试覆盖率的统计(DOM部分)
-- [ ] 增加数组拼接、增强对象合并的功能、对象根据字符串获取相对应的值、增加NaN类型判断、增加Number类型判断、增加数组对比、增加对象对比
+- [ ] 增加数组拼接、增强对象合并的功能、对象根据字符串获取相对应的值、增加NaN类型判断、增加Boolean类型判断、增加数组对比、增加对象对比

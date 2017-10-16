@@ -82,7 +82,7 @@ const typeCheck = function(obj, isAny) {
  * 判断是否其中一个满足条件
  * @param {object} obj 
  */
-const any = function(obj) {
+export const any = function(obj) {
 	return typeCheck(obj, true);
 };
 
@@ -90,7 +90,7 @@ const any = function(obj) {
  * 判断是否全部满足条件
  * @param {object} obj 
  */
-const all = function(obj) {
+export const all = function(obj) {
 	return typeCheck(obj);
 };
 
