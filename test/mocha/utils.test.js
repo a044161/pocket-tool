@@ -67,11 +67,74 @@ describe('数组判断', () => {
 	});
 });
 
+describe('数字判断', () => {
+	runTestFn('isNumber', item => {
+		it(`${item.name}${item.expect ? '为' : '不为'}数字`, () => {
+			booleanFn(Utils.isNumber(item.value), item.expect);
+		});
+	});
+});
+
 describe('合并对象', () => {
 	runTestFn('merge', item => {
 		it(item.name, () => {
 			let mergeResult = Utils.merge(...item.value);
 			mergeResult.should.be.eql(item.expect);
+		});
+	});
+});
+
+describe('批量类型检查', () => {
+	describe('全部满足条件', () => {
+		runTestFn('typeCheckAll', item => {
+			it(item.name, () => {
+				let typeCheckResult = Utils.typeCheck.all(item.value);
+				typeCheckResult.should.be.eql(item.expect);
+			});
+		});
+	});
+	describe('其中一个满足条件', () => {
+		runTestFn('typeCheckAny', item => {
+			it(item.name, () => {
+				let typeCheckResult = Utils.typeCheck.any(item.value);
+				typeCheckResult.should.be.eql(item.expect);
+			});
+		});
+	});
+});
+
+describe('类型返回', () => {
+	runTestFn('typeIs', item => {
+		it(item.name, () => {
+			let typeCheckResult = Utils.typeIs(item.value);
+			typeCheckResult.should.be.eql(item.expect);
+		});
+	});
+});
+
+describe('typeObject.is 测试', () => {
+	runTestFn('typeObjectIs', item => {
+		it(item.name, () => {
+			let typeCheckResult = Utils.typeObject.is[item.expect](item.value);
+			typeCheckResult.should.be.true();
+		});
+	});
+});
+
+describe('typeObject.code 测试', () => {
+	runTestFn('typeObjectCode', item => {
+		it(item.name, () => {
+			let typeCheckResult = Utils.typeObject.code[item.value];
+			typeCheckResult.should.be.eql(item.expect);
+		});
+	});
+});
+
+describe('转化为数组测试', () => {
+	runTestFn('toArray', item => {
+		it(item.name, () => {
+			let typeCheckResult = Utils.toArray(item.value);
+			typeCheckResult.should.be.deepEqual(item.expect);
 		});
 	});
 });

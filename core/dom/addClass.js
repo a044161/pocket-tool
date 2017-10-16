@@ -2,18 +2,14 @@ import Utils from '../utils/index';
 
 const addClass = function(element, className) {
 	if (!Utils.isString(className)) {
-		throw '参数2传入的对象类型必须为string';
+		throw new Error(`${className} 必须为string`);
 	}
 
-	if (element.length) {
-		element = Array.from(element);
-	} else {
-		element = [element];
-	}
+	element = Utils.toArray(element);
 
 	element.forEach((e, index) => {
 		if (!e.nodeType) {
-			throw `${e} 必须为HTMLElement`;
+			throw new Error(`${e} 必须为HTMLElement`);
 		}
 		let oldClassName =
 			e.className.length === 0 ? [] : e.className.split(' ');

@@ -67,7 +67,7 @@
 			var jquery_class_child = $(CLASS_CHILD);
 
 			it('无匹配class，返回nodelist object', function() {
-				getElement('.none').length.should.equal(0);
+				getElement('.none').length.should.equal(1);
 			});
 
 			it('成功获取class，则长度大于0', function() {

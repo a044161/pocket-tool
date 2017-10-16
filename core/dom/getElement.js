@@ -32,7 +32,7 @@ const _getElement = function(tag) {
 		}
 	}
 
-	elementArray = Array.from(elementArray);
+	elementArray = Utils.toArray(elementArray);
 
 	// 拓展方法
 	const extendObj = {

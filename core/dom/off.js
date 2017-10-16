@@ -1,44 +1,46 @@
 import Utils from '../utils/index';
 
+const handleRemoveEventListener = function(ele, event, handler) {
+	ele.removeEventListener(event, handler);
+};
+
+const handleDetachEvent = function(ele, event, handler) {
+	ele.detachEvent('on' + event, handler);
+};
+
 const off = function(element, event, handler, propagation) {
-	if (element.length) {
-		element = Array.from(element);
-	} else {
-		element = [element];
-	}
-
-	if (!Utils.isString(event)) {
-		throw `${event} 必须为string`;
-	}
-
-	if (!Utils.isFunction(handler)) {
-		throw `${handler} 必须为Function`;
-	}
-
-	element = Array.from(element);
-
-	if (document.removeEventListener) {
-		if (!propagation) {
-			propagation = false;
+	const _type = [
+		{
+			type: 'string',
+			value: event
+		},
+		{
+			type: 'function',
+			value: handler
 		}
-		if (element && event) {
-			element.forEach(e => {
-				if (!e.nodeType) {
-					throw `${e} 必须为HTMLElement`;
-				}
-				e.removeEventListener(event, handler, propagation);
-			});
-		}
-	} else {
-		if (element && event) {
-			element.forEach(e => {
-				if (!e.nodeType) {
-					throw `${e} 必须为HTMLElement`;
-				}
-				e.detachEvent('on' + event, handler);
-			});
-		}
+	];
+
+	if (!Utils.typeCheck.all(_type)) {
+		throw new Error(`${event} 必须为string, ${handler} 必须为Function`);
 	}
+
+	element = Utils.toArray(element);
+
+	let eventHandle = function(e, event, handler) {
+		if (document.addEventListener) {
+			eventHandle = handleRemoveEventListener;
+		} else {
+			eventHandle = handleDetachEvent;
+		}
+		eventHandle(e, event, handler);
+	};
+
+	element.forEach(e => {
+		if (!e.nodeType) {
+			throw `${e} 必须为HTMLElement`;
+		}
+		eventHandle(e, event, handler);
+	});
 };
 
 export default off;

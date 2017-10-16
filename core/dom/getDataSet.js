@@ -6,11 +6,11 @@ const getDataSet = function(element, key) {
 	}
 
 	if (!element.nodeType) {
-		throw `${element} 必须为HTMLElement`;
+		throw new Error(`${element} 必须为HTMLElement`);
 	}
 
 	if (!Utils.isString(key)) {
-		throw '参数2传入的对象类型必须为string';
+		throw new Error(`${key} 必须为string`);
 	}
 	let val;
 

@@ -1,3 +1,6 @@
+[![npm](https://img.shields.io/npm/v/pocket-tool.svg?style=flat-square)](https://www.npmjs.com/package/pocket-tool)
+[![npm](https://img.shields.io/npm/dt/pocket-tool.svg?style=flat-square)](https://www.npmjs.com/package/pocket-tool)
+
 <!-- TOC -->
 
 - [pocket-tool](#pocket-tool)

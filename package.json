@@ -1,6 +1,6 @@
 {
 	"name": "pocket-tool",
-	"version": "1.0.5",
+	"version": "1.0.6",
 	"description": "build own tools",
 	"main": "index.js",
 	"scripts": {
@@ -9,9 +9,9 @@
 		"dist": "rollup --config rollup.config.js",
 		"dist:dev": "npm run clean && rollup --config rollup.dev.config.js",
 		"test": "npm run test:mocha && npm run test:phantomjs",
-		"test:mocha": "npm run dist && mocha test/mocha",
+		"test:mocha": "npm run dist:dev && mocha test/mocha",
 		"test:phantomjs":
-			"phantomjs ./node_modules/mocha-phantomjs-core/mocha-phantomjs-core.js ./test/phantomjs/index.html spec '{\"useColors\":true}'",
+			"npm run dist:dev && phantomjs ./node_modules/mocha-phantomjs-core/mocha-phantomjs-core.js ./test/phantomjs/index.html spec '{\"useColors\":true}'",
 		"coverage": "npm run dist:dev && istanbul cover _mocha test/mocha",
 		"clean": "rm -rf dist/"
 	},

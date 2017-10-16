@@ -4,7 +4,14 @@ const isString = require('./isString');
 const isUndefined = require('./isUndefined');
 const isFunction = require('./isFunction');
 const isArray = require('./isArray');
+const isNumber = require('./isNumber');
 const merge = require('./merge');
+const typeCheckAll = require('./typeCheckAll');
+const typeCheckAny = require('./typeCheckAny');
+const typeIs = require('./typeIs');
+const typeObjectIs = require('./typeObjectIs');
+const typeObjectCode = require('./typeObjectCode');
+const toArray = require('./toArray');
 
 module.exports = {
 	isObject,
@@ -13,5 +20,12 @@ module.exports = {
 	isUndefined,
 	isFunction,
 	isArray,
-	merge
+	isNumber,
+	merge,
+	typeCheckAll,
+	typeCheckAny,
+	typeIs,
+	typeObjectIs,
+	typeObjectCode,
+	toArray
 };
