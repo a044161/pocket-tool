@@ -55,7 +55,11 @@
 4. isArray - 判断是否为数组
 5. isFunction - 判断是否为函数
 6. isString - 判断是否为字符串
-7. merge - 合并对象
+7. isNumber - 判断是否为数值
+8. merge - 合并对象
+9. toArray - 转换类数组对象为数组对象
+10. typeCheck - 批量校验对象的类型
+11. typeIs - 判断对象属于某种类型
 
 ### dom
 
