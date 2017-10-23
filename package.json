@@ -1,6 +1,6 @@
 {
 	"name": "pocket-tool",
-	"version": "1.0.7",
+	"version": "1.0.8",
 	"description": "build own tools",
 	"main": "index.js",
 	"scripts": {
