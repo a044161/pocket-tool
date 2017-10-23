@@ -7,28 +7,31 @@ import _off from './off';
 import _getDataSet from './getDataSet';
 
 const _getElement = function(tag) {
-	if (!Utils.isString(tag)) {
-		throw '传入的对象类型必须为string';
-	}
+	const isNode = !!tag.nodeType;
 
-	const isId = tag.indexOf('#') === 0;
-	const isClass = tag.indexOf('.') === 0;
 	let elementArray = [];
 
-	if (document.querySelector) {
-		if (isClass || !isId) {
-			elementArray = document.querySelectorAll(tag);
-		} else {
-			elementArray.push(document.querySelector(tag));
-		}
-	} else if (isId || isClass) {
-		tag = tag.slice(1);
-		if (isId) {
-			elementArray.push(document.getElementById(tag));
-		} else if (isClass) {
-			elementArray = document.getElementsByClassName(tag);
-		} else {
-			elementArray = document.getElementsByTagName(tag);
+	if (isNode) {
+		elementArray.push(tag);
+	} else {
+		const isId = tag.indexOf('#') === 0;
+		const isClass = tag.indexOf('.') === 0;
+
+		if (document.querySelector) {
+			if (isClass || !isId) {
+				elementArray = document.querySelectorAll(tag);
+			} else {
+				elementArray.push(document.querySelector(tag));
+			}
+		} else if (isId || isClass) {
+			tag = tag.slice(1);
+			if (isId) {
+				elementArray.push(document.getElementById(tag));
+			} else if (isClass) {
+				elementArray = document.getElementsByClassName(tag);
+			} else {
+				elementArray = document.getElementsByTagName(tag);
+			}
 		}
 	}
 

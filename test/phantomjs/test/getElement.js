@@ -11,34 +11,9 @@
 	var DATA_TEST = '[data-test=test-data]';
 
 	describe('getElement Test', function() {
-		describe('Error相关', function() {
-			it('传入[]为错误类型', function() {
-				getElement.bind(this, []).should.throw();
-			});
-
-			it('传入null为错误类型', function() {
-				getElement.bind(this, null).should.throw();
-			});
-
-			it('传入undefined为错误类型', function() {
-				getElement.bind(this, undefined).should.throw();
-			});
-
-			it('传入{}为错误类型', function() {
-				getElement.bind(this, {}).should.throw();
-			});
-
-			it('传入1为错误类型', function() {
-				getElement.bind(this, 1).should.throw();
-			});
-
-			it('传入function为错误类型', function() {
-				getElement.bind(this, function() {}).should.throw();
-			});
-		});
+		var getElement_id = getElement(ID);
 
 		describe('id相关', function() {
-			var getElement_id = getElement(ID);
 			var jquery_id = $(ID);
 
 			it('无匹配ID，返回null', function() {
